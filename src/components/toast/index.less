@@ -1,0 +1,90 @@
+@import './var.less';
+
+:root {
+  --pant-toast-max-width: @toast-max-width;
+  --pant-toast-font-size: @toast-font-size;
+  --pant-toast-text-color: @toast-text-color;
+  --pant-toast-loading-icon-color: @toast-loading-icon-color;
+  --pant-toast-line-height: @toast-line-height;
+  --pant-toast-border-radius: @toast-border-radius;
+  --pant-toast-background-color: @toast-background-color;
+  --pant-toast-icon-size: @toast-icon-size;
+  --pant-toast-text-min-width: @toast-text-min-width;
+  --pant-toast-text-padding: @toast-text-padding;
+  --pant-toast-default-padding: @toast-default-padding;
+  --pant-toast-default-width: @toast-default-width;
+  --pant-toast-default-min-height: @toast-default-min-height;
+  --pant-toast-position-top-distance: @toast-position-top-distance;
+  --pant-toast-position-bottom-distance: @toast-position-bottom-distance;
+}
+
+.pant-toast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  transition: all var(--pant-animation-duration-fast);
+
+  // hack for avoid max-width when use left & fixed
+  width: var(--pant-toast-default-width);
+  max-width: var(--pant-toast-max-width);
+  min-height: var(--pant-toast-default-min-height);
+  padding: var(--pant-toast-default-padding);
+  color: var(--pant-toast-text-color);
+  font-size: var(--pant-toast-font-size);
+  line-height: var(--pant-toast-line-height);
+
+  // allow newline character
+  white-space: pre-wrap;
+  text-align: center;
+  word-break: break-all;
+  background-color: var(--pant-toast-background-color);
+  border-radius: var(--pant-toast-border-radius);
+
+  &--unclickable {
+    // lock scroll
+    overflow: hidden;
+    cursor: not-allowed;
+
+    // should not add pointer-events: none directly to body tag
+    // that will cause unexpected tap-highlight-color in mobile safari
+    * {
+      pointer-events: none;
+    }
+  }
+
+  &--text,
+  &--html {
+    width: fit-content;
+    min-width: var(--pant-toast-text-min-width);
+    min-height: 0;
+    padding: var(--pant-toast-text-padding);
+
+    .pant-toast__text {
+      margin-top: 0;
+    }
+  }
+
+  &--top {
+    top: var(--pant-toast-position-top-distance);
+  }
+
+  &--bottom {
+    top: auto;
+    bottom: var(--pant-toast-position-bottom-distance);
+  }
+
+  &__icon {
+    font-size: var(--pant-toast-icon-size);
+  }
+
+  &__loading {
+    padding: var(--pant-padding-base);
+    color: var(--pant-toast-loading-icon-color);
+  }
+
+  &__text {
+    margin-top: var(--pant-padding-xs);
+  }
+}

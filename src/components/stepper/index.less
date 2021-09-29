@@ -1,0 +1,149 @@
+@import './var.less';
+
+:root {
+  --pant-stepper-active-color: @stepper-active-color;
+  --pant-stepper-background-color: @stepper-background-color;
+  --pant-stepper-button-icon-color: @stepper-button-icon-color;
+  --pant-stepper-button-disabled-color: @stepper-button-disabled-color;
+  --pant-stepper-button-disabled-icon-color: @stepper-button-disabled-icon-color;
+  --pant-stepper-button-round-theme-color: @stepper-button-round-theme-color;
+  --pant-stepper-input-width: @stepper-input-width;
+  --pant-stepper-input-height: @stepper-input-height;
+  --pant-stepper-input-font-size: @stepper-input-font-size;
+  --pant-stepper-input-line-height: @stepper-input-line-height;
+  --pant-stepper-input-text-color: @stepper-input-text-color;
+  --pant-stepper-input-disabled-text-color: @stepper-input-disabled-text-color;
+  --pant-stepper-input-disabled-background-color: @stepper-input-disabled-background-color;
+  --pant-stepper-border-radius: @stepper-border-radius;
+}
+
+.pant-stepper {
+  display: inline-block;
+  user-select: none;
+
+  &__minus,
+  &__plus {
+    position: relative;
+    box-sizing: border-box;
+    width: var(--pant-stepper-input-height);
+    height: var(--pant-stepper-input-height);
+    margin: 0;
+    padding: 0;
+    color: var(--pant-stepper-button-icon-color);
+    vertical-align: middle;
+    background-color: var(--pant-stepper-background-color);
+    border: 0;
+    cursor: pointer;
+
+    &::before {
+      width: 50%;
+      height: 4px;
+    }
+
+    &::after {
+      width: 4px;
+      height: 50%;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: currentColor;
+      transform: translate(-50%, -50%);
+      content: '';
+    }
+
+    &:active {
+      background-color: var(--pant-stepper-active-color);
+    }
+
+    &--disabled {
+      color: var(--pant-stepper-button-disabled-icon-color);
+      background-color: var(--pant-stepper-button-disabled-color);
+      cursor: not-allowed;
+
+      &:active {
+        background-color: var(--pant-stepper-button-disabled-color);
+      }
+    }
+  }
+
+  &__minus {
+    border-radius: var(--pant-stepper-border-radius) 0 0
+      var(--pant-stepper-border-radius);
+
+    &::after {
+      display: none;
+    }
+  }
+
+  &__plus {
+    border-radius: 0 var(--pant-stepper-border-radius)
+      var(--pant-stepper-border-radius) 0;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    width: var(--pant-stepper-input-width);
+    height: var(--pant-stepper-input-height);
+    margin: 0 2px;
+    padding: 0;
+    color: var(--pant-stepper-input-text-color);
+    font-size: var(--pant-stepper-input-font-size);
+    line-height: var(--pant-stepper-input-line-height);
+    text-align: center;
+    vertical-align: middle;
+    background-color: var(--pant-stepper-background-color);
+    border: 0;
+    border-width: 1px 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+
+    &:disabled {
+      color: var(--pant-stepper-input-disabled-text-color);
+      background-color: var(--pant-stepper-input-disabled-background-color);
+      // fix disabled color in iOS
+      -webkit-text-fill-color: var(--pant-stepper-input-disabled-text-color);
+      opacity: 1;
+    }
+
+    &:read-only {
+      cursor: default;
+    }
+  }
+
+  &--round {
+    .pant-stepper__input {
+      background-color: transparent;
+    }
+
+    .pant-stepper__plus,
+    .pant-stepper__minus {
+      border-radius: 100%;
+
+      &:active {
+        opacity: var(--pant-active-opacity);
+      }
+
+      &--disabled {
+        &,
+        &:active {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    .pant-stepper__plus {
+      color: var(--pant-white);
+      background-color: var(--pant-stepper-button-round-theme-color);
+    }
+
+    .pant-stepper__minus {
+      color: var(--pant-stepper-button-round-theme-color);
+      background-color: var(--pant-white);
+      border: 1px solid var(--pant-stepper-button-round-theme-color);
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import './var.less';
+
+:root {
+  --pant-action-bar-button-height: @action-bar-button-height;
+  --pant-action-bar-button-warning-color: @action-bar-button-warning-color;
+  --pant-action-bar-button-danger-color: @action-bar-button-danger-color;
+}
+
+.pant-action-bar-button {
+  font-weight: var(--pant-font-weight-bold);
+  border: none;
+  border-radius: 0;
+
+  &--first {
+    margin-bottom: 16px;
+    border-radius: var(--pant-border-radius-max);
+    font-size: var(--pant-font-size-lg);
+  }
+
+  &--last {
+    border: none;
+    border-radius: var(--pant-border-radius-max);
+    font-size: var(--pant-font-size-sm);
+    color: var(--pant-gray-9);
+  }
+
+  &--warning {
+    background: none;
+  }
+
+  &--danger {
+    background: var(--pant-action-bar-button-danger-color);
+  }
+
+  @media (max-width: 321px) {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,51 @@
+@import './var.less';
+
+:root {
+  --pant-badge-size: @badge-size;
+  --pant-badge-color: @badge-color;
+  --pant-badge-padding: @badge-padding;
+  --pant-badge-font-size: @badge-font-size;
+  --pant-badge-font-weight: @badge-font-weight;
+  --pant-badge-border-width: @badge-border-width;
+  --pant-badge-background-color: @badge-background-color;
+  --pant-badge-dot-color: @badge-dot-color;
+  --pant-badge-dot-size: @badge-dot-size;
+  --pant-badge-font-family: @badge-font-family;
+}
+
+.pant-badge {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: var(--pant-badge-size);
+  padding: var(--pant-badge-padding);
+  color: var(--pant-badge-color);
+  font-weight: var(--pant-badge-font-weight);
+  font-size: var(--pant-badge-font-size);
+  font-family: var(--pant-badge-font-family);
+  line-height: 1.2;
+  text-align: center;
+  background-color: var(--pant-badge-background-color);
+  border: var(--pant-badge-border-width) solid var(--pant-white);
+  border-radius: var(--pant-border-radius-max);
+
+  &--fixed {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    transform-origin: 100%;
+  }
+
+  &--dot {
+    width: var(--pant-badge-dot-size);
+    min-width: 0;
+    height: var(--pant-badge-dot-size);
+    background-color: var(--pant-badge-dot-color);
+    border-radius: 100%;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: inline-block;
+  }
+}

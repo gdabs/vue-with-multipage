@@ -1,0 +1,54 @@
+@import './assets/css/normallize.less';
+@import './components/style/base.less';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  color: inherit;
+}
+a:active,
+a:hover {
+  outline: none;
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+a,
+ul,
+button,
+button:active,
+div {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+button,
+textarea {
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+
+[class*='pant-'] {
+  &:focus {
+    outline: none;
+  }
+}
+
+ol,
+li,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

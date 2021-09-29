@@ -1,0 +1,65 @@
+@import './var.less';
+
+:root {
+  --pant-swipe-indicator-size: @swipe-indicator-size;
+  --pant-swipe-indicator-margin: @swipe-indicator-margin;
+  --pant-swipe-indicator-active-opacity: @swipe-indicator-active-opacity;
+  --pant-swipe-indicator-inactive-opacity: @swipe-indicator-inactive-opacity;
+  --pant-swipe-indicator-active-background-color: @swipe-indicator-active-background-color;
+  --pant-swipe-indicator-inactive-background-color: @swipe-indicator-inactive-background-color;
+}
+
+.pant-swipe {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+
+  &__track {
+    display: flex;
+    height: 100%;
+
+    &--vertical {
+      flex-direction: column;
+    }
+  }
+
+  &__indicators {
+    position: absolute;
+    bottom: var(--pant-swipe-indicator-margin);
+    left: 50%;
+    display: flex;
+    transform: translateX(-50%);
+
+    &--vertical {
+      top: 50%;
+      bottom: auto;
+      left: var(--pant-swipe-indicator-margin);
+      flex-direction: column;
+      transform: translateY(-50%);
+
+      .pant-swipe__indicator:not(:last-child) {
+        margin-bottom: var(--pant-swipe-indicator-size);
+      }
+    }
+  }
+
+  &__indicator {
+    width: var(--pant-swipe-indicator-size);
+    height: var(--pant-swipe-indicator-size);
+    background-color: var(--pant-swipe-indicator-inactive-background-color);
+    border-radius: 100%;
+    opacity: var(--pant-swipe-indicator-inactive-opacity);
+    transition: opacity var(--pant-animation-duration-fast),
+      background-color var(--pant-animation-duration-fast);
+
+    &:not(:last-child) {
+      margin-right: var(--pant-swipe-indicator-size);
+    }
+
+    &--active {
+      background-color: var(--pant-swipe-indicator-active-background-color);
+      opacity: var(--pant-swipe-indicator-active-opacity);
+    }
+  }
+}

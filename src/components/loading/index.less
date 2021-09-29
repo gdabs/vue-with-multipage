@@ -1,0 +1,112 @@
+@import './var.less';
+
+:root {
+  --pant-loading-text-color: @loading-text-color;
+  --pant-loading-text-font-size: @loading-text-font-size;
+  --pant-loading-spinner-color: @loading-spinner-color;
+  --pant-loading-spinner-size: @loading-spinner-size;
+  --pant-loading-spinner-animation-duration: @loading-spinner-animation-duration;
+}
+
+.pant-loading {
+  position: relative;
+  color: var(--pant-loading-spinner-color);
+  font-size: 0;
+  vertical-align: middle;
+
+  &__spinner {
+    position: relative;
+    display: inline-block;
+    width: var(--pant-loading-spinner-size);
+    // compatible for 1.x, users may set width or height in root element
+    max-width: 100%;
+    height: var(--pant-loading-spinner-size);
+    max-height: 100%;
+    vertical-align: middle;
+    animation: pant-rotate var(--pant-loading-spinner-animation-duration) linear
+      infinite;
+
+    &--spinner {
+      animation-timing-function: steps(12);
+    }
+
+    &--circular {
+      animation-duration: 2s;
+    }
+  }
+
+  &__line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &::before {
+      display: block;
+      width: 2px;
+      height: 25%;
+      margin: 0 auto;
+      background-color: currentColor;
+      border-radius: 40%;
+      content: ' ';
+    }
+  }
+
+  &__circular {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    circle {
+      animation: pant-circular 1.5s ease-in-out infinite;
+      stroke: currentColor;
+      stroke-width: 3;
+      stroke-linecap: round;
+    }
+  }
+
+  &__text {
+    display: inline-block;
+    margin-left: var(--pant-padding-xs);
+    color: var(--pant-loading-text-color);
+    font-size: var(--pant-loading-text-font-size);
+    vertical-align: middle;
+  }
+
+  &--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .pant-loading__text {
+      margin: var(--pant-padding-xs) 0 0;
+    }
+  }
+}
+
+@keyframes pant-circular {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40;
+  }
+
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120;
+  }
+}
+
+.generate-spinner(@n, @i: 1) when (@i =< @n) {
+  .pant-loading__line--@{i} {
+    transform: rotate(@i * 30deg);
+    opacity: 1 - (0.75 / 12) * (@i - 1);
+  }
+  .generate-spinner(@n, (@i + 1));
+}
+.generate-spinner(12);
